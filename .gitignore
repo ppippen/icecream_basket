@@ -19,5 +19,8 @@ node_modules/
 # Ignore Playwright reports
 playwright-report/
 
+# Ignore Windsurf deployment config
+windsurf_deployment.yaml
+
 # Ignore dist folder
 dist/
