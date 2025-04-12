@@ -1,0 +1,23 @@
+# Ignore backup directory and all its contents
+backup/
+
+# Ignore cursor rules
+.cursorrules
+
+# ingore test results from test-results directory
+test-results/
+
+# ignore docs directory
+docs/
+
+# ignore node_modules directory
+node_modules/
+
+# ignore .vscode directory
+.vscode/
+
+# Ignore Playwright reports
+playwright-report/
+
+# Ignore dist folder
+dist/

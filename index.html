@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎光临冰激凌小店</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>欢迎光临冰激凌小店 #33号分店</h1>
+        </header>
+        
+        <main>
+            <section class="ice-cream-shop">
+                <div class="menu-section">
+                    <h2>淋酱</h2>
+                    <div class="toppings">
+                        <div id="topping-alert" class="alert-message">
+                            请先选择冰激凌球
+                        </div>
+                        <div class="topping" data-type="topping" data-flavor="cream" data-price="1">
+                            <div class="sauce cream"></div>
+                            <p>淡奶油 <span>¥1</span></p>
+                        </div>
+                        <div class="topping" data-type="topping" data-flavor="cherry" data-price="2">
+                            <div class="sauce cherry"></div>
+                            <p>樱桃 <span>¥2</span></p>
+                        </div>
+                        <div class="topping" data-type="topping" data-flavor="caramel" data-price="1.5">
+                            <div class="sauce caramel"></div>
+                            <p>焦糖 <span>¥1.5</span></p>
+                        </div>
+                    </div>
+                    
+                    <h2>冰激凌球</h2>
+                    <div class="flavors">
+                        <div class="flavor" data-type="scoop" data-flavor="strawberry" data-price="5">
+                            <div class="ice-cream-ball strawberry"></div>
+                            <p>草莓 <span>¥5</span></p>
+                        </div>
+                        <div class="flavor" data-type="scoop" data-flavor="chocolate" data-price="7">
+                            <div class="ice-cream-ball chocolate"></div>
+                            <p>巧克力 <span>¥7</span></p>
+                        </div>
+                        <div class="flavor" data-type="scoop" data-flavor="vanilla" data-price="3">
+                            <div class="ice-cream-ball vanilla"></div>
+                            <p>香草 <span>¥3</span></p>
+                        </div>
+                        <div class="flavor" data-type="scoop" data-flavor="mint" data-price="6">
+                            <div class="ice-cream-ball mint"></div>
+                            <p>薄荷 <span>¥6</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-section">
+                    <h2>我的冰激凌</h2>
+                    <div class="cone-container">
+                        <div class="cone"></div>
+                        <div class="ice-cream-stack" id="ice-cream-stack"></div>
+                    </div>
+                    
+                    <div class="order-summary">
+                        <h3>总价: <span id="total-price">¥0.00</span></h3>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button id="undo-btn" class="btn undo-btn">撤销</button>
+                        <button id="checkout-btn" class="btn checkout-btn">结算</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>谢谢光临!</h2>
+            <div class="order-details">
+                <div class="toppings-summary">
+                    <h4>淋酱:</h4>
+                    <div class="summary-icons">
+                        <div class="summary-item">
+                            <div class="mini-sauce cream"></div>
+                            <span class="count" data-flavor="cream">x 0</span>
+                        </div>
+                        <div class="summary-item">
+                            <div class="mini-sauce cherry"></div>
+                            <span class="count" data-flavor="cherry">x 0</span>
+                        </div>
+                        <div class="summary-item">
+                            <div class="mini-sauce caramel"></div>
+                            <span class="count" data-flavor="caramel">x 0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="scoops-summary">
+                    <h4>冰激凌球:</h4>
+                    <div class="summary-icons">
+                        <div class="summary-item">
+                            <div class="mini-scoop strawberry"></div>
+                            <span class="count" data-flavor="strawberry">x 0</span>
+                        </div>
+                        <div class="summary-item">
+                            <div class="mini-scoop chocolate"></div>
+                            <span class="count" data-flavor="chocolate">x 0</span>
+                        </div>
+                        <div class="summary-item">
+                            <div class="mini-scoop vanilla"></div>
+                            <span class="count" data-flavor="vanilla">x 0</span>
+                        </div>
+                        <div class="summary-item">
+                            <div class="mini-scoop mint"></div>
+                            <span class="count" data-flavor="mint">x 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>您的冰激凌总价是: <span id="final-price">¥0.00</span></p>
+            <button id="new-order-btn" class="btn">开始新订单</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
