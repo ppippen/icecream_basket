@@ -116,32 +116,32 @@ h3 {
 
 /* 冰激凌球图片 */
 .ice-cream-ball.strawberry {
-    background-image: url('/icons/icecream_pink_strawberry.png');
+    background-image: url('icons/icecream_pink_strawberry.png');
 }
 
 .ice-cream-ball.chocolate {
-    background-image: url('/icons/icecream_brown_chocolate.png');
+    background-image: url('icons/icecream_brown_chocolate.png');
 }
 
 .ice-cream-ball.vanilla {
-    background-image: url('/icons/icecream_yellow_vanilla.png');
+    background-image: url('icons/icecream_yellow_vanilla.png');
 }
 
 .ice-cream-ball.mint {
-    background-image: url('/icons/icecream_green_mint.png');
+    background-image: url('icons/icecream_green_mint.png');
 }
 
 /* 淋酱图片 */
 .sauce.cream {
-    background-image: url('/icons/topping_white_cream.png');
+    background-image: url('icons/topping_white_cream.png');
 }
 
 .sauce.cherry {
-    background-image: url('/icons/topping_red_cherry.png');
+    background-image: url('icons/topping_red_cherry.png');
 }
 
 .sauce.caramel {
-    background-image: url('/icons/topping_orange_caramel.png');
+    background-image: url('icons/topping_orange_caramel.png');
 }
 
 /* 冰激凌堆叠区域 */
@@ -160,7 +160,7 @@ h3 {
     bottom: 0;
     width: 80px;
     height: 120px;
-    background-image: url('/icons/cone.png');
+    background-image: url('icons/cone.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center bottom;
@@ -199,33 +199,33 @@ h3 {
 
 /* 特定冰激凌球样式 */
 .stack-item.strawberry {
-    background-image: url('/icons/icecream_pink_strawberry.png');
+    background-image: url('icons/icecream_pink_strawberry.png');
 }
 
 .stack-item.chocolate {
-    background-image: url('/icons/icecream_brown_chocolate.png');
+    background-image: url('icons/icecream_brown_chocolate.png');
 }
 
 .stack-item.vanilla {
-    background-image: url('/icons/icecream_yellow_vanilla.png');
+    background-image: url('icons/icecream_yellow_vanilla.png');
 }
 
 .stack-item.mint {
-    background-image: url('/icons/icecream_green_mint.png');
+    background-image: url('icons/icecream_green_mint.png');
 }
 
 
 /* 特定淋酱样式 */
 .stack-item.topping.cream {
-    background-image: url('/icons/topping_white_cream.png');
+    background-image: url('icons/topping_white_cream.png');
 }
 
 .stack-item.topping.cherry {
-    background-image: url('/icons/topping_red_cherry.png');
+    background-image: url('icons/topping_red_cherry.png');
 }
 
 .stack-item.topping.caramel {
-    background-image: url('/icons/topping_orange_caramel.png');
+    background-image: url('icons/topping_orange_caramel.png');
 }
 
 /* 按钮样式 */
@@ -406,32 +406,32 @@ h3 {
 
 /* 迷你冰激凌球样式 */
 .mini-scoop.strawberry {
-    background-image: url('/icons/icecream_pink_strawberry.png');
+    background-image: url('icons/icecream_pink_strawberry.png');
 }
 
 .mini-scoop.chocolate {
-    background-image: url('/icons/icecream_brown_chocolate.png');
+    background-image: url('icons/icecream_brown_chocolate.png');
 }
 
 .mini-scoop.vanilla {
-    background-image: url('/icons/icecream_yellow_vanilla.png');
+    background-image: url('icons/icecream_yellow_vanilla.png');
 }
 
 .mini-scoop.mint {
-    background-image: url('/icons/icecream_green_mint.png');
+    background-image: url('icons/icecream_green_mint.png');
 }
 
 /* 迷你淋酱样式 */
 .mini-sauce.cream {
-    background-image: url('/icons/topping_white_cream.png');
+    background-image: url('icons/topping_white_cream.png');
 }
 
 .mini-sauce.cherry {
-    background-image: url('/icons/topping_red_cherry.png');
+    background-image: url('icons/topping_red_cherry.png');
 }
 
 .mini-sauce.caramel {
-    background-image: url('/icons/topping_orange_caramel.png');
+    background-image: url('icons/topping_orange_caramel.png');
 }
 
 /* 数量样式 */
