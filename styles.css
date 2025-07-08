@@ -146,35 +146,33 @@ h3 {
 
 /* 冰激凌堆叠区域 */
 .cone-container {
-    position: relative;
     height: 300px;
     width: 150px;
-    /* margin: 20px 0; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    overflow-y: auto;
+    position: relative;
 }
 
-.cone {
-    position: absolute;
-    bottom: 0;
+.ice-cream-stack {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-start; /* 从底部开始堆叠 */
+    position: relative;
+    min-height: 100%; /* 确保堆叠区至少和容器一样高 */
+}
+
+/* 动态甜筒样式 */
+.stack-item.cone-style {
     width: 80px;
-    height: 120px;
+    height: 100px;
     background-image: url('icons/cone.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center bottom;
-    z-index: 1;
-}
-
-.ice-cream-stack {
-    position: absolute;
-    bottom: 110px;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    width: 80px;
-    z-index: 2;
+    z-index: 1; /* 确保甜筒在最上层 */
+    margin-bottom: 0; /* 甜筒没有负边距 */
+    border-radius: 0; /* 覆盖默认的stack-item圆角 */
 }
 
 /* 堆叠元素样式 */
