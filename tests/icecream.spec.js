@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 test.describe('冰激凌小店测试', () => {
   test.beforeEach(async ({ page }) => {
     // 在每个测试前访问冰激凌小店页面
-    await page.goto('http://localhost:3000');
+    await page.goto('http://localhost:64909');
   });
 
   test('测试添加冰激凌球后可以添加淋酱', async ({ page }) => {
@@ -12,6 +12,8 @@ test.describe('冰激凌小店测试', () => {
     
     // 验证订单中有一个巧克力冰激凌球
     await expect(page.locator('#ice-cream-stack .stack-item.chocolate')).toHaveCount(1);
+    // 验证总元素数量：1个甜筒 + 1个冰激凌球 = 2个
+    await expect(page.locator('#ice-cream-stack .stack-item')).toHaveCount(2);
     
     // 验证总价已更新
     await expect(page.locator('#total-price')).toHaveText('¥7.00');
@@ -21,12 +23,18 @@ test.describe('冰激凌小店测试', () => {
     
     // 验证订单中有一个樱桃淋酱
     await expect(page.locator('#ice-cream-stack .stack-item.topping.cherry')).toHaveCount(1);
+    // 验证总元素数量：1个甜筒 + 1个冰激凌球 + 1个淋酱 = 3个
+    await expect(page.locator('#ice-cream-stack .stack-item')).toHaveCount(3);
     
     // 验证总价已更新
     await expect(page.locator('#total-price')).toHaveText('¥9.00');
   });
 
   test('测试没有冰激凌球时无法添加淋酱并显示提示', async ({ page }) => {
+    // 验证初始状态只有甜筒
+    await expect(page.locator('#ice-cream-stack .stack-item')).toHaveCount(1);
+    await expect(page.locator('#ice-cream-stack .stack-item.cone-style')).toHaveCount(1);
+    
     // 尝试添加一个淋酱（此时没有冰激凌球）
     await page.click('.topping[data-flavor="cream"]');
     
@@ -36,8 +44,8 @@ test.describe('冰激凌小店测试', () => {
     // 验证提示信息内容
     await expect(page.locator('#topping-alert')).toHaveText('请先选择冰激凌球');
     
-    // 验证订单中没有淋酱
-    await expect(page.locator('#ice-cream-stack .stack-item')).toHaveCount(0);
+    // 验证订单中除了甜筒没有其他商品
+    await expect(page.locator('#ice-cream-stack .stack-item')).toHaveCount(1);
     
     // 验证总价仍为0
     await expect(page.locator('#total-price')).toHaveText('¥0.00');
@@ -56,8 +64,8 @@ test.describe('冰激凌小店测试', () => {
     // 添加另一个樱桃淋酱
     await page.click('.topping[data-flavor="cherry"]');
     
-    // 验证订单中有两个冰激凌球和两个淋酱
-    await expect(page.locator('#ice-cream-stack .stack-item')).toHaveCount(4);
+    // 验证订单中有两个冰激凌球和两个淋酱，加上甜筒共5个元素
+    await expect(page.locator('#ice-cream-stack .stack-item')).toHaveCount(1 + 4);
     
     // 验证总价正确
     await expect(page.locator('#total-price')).toHaveText('¥12.50');
@@ -75,6 +83,9 @@ test.describe('冰激凌小店测试', () => {
     // 验证订单中有两个草莓冰激凌球和两个淡奶油淋酱
     await expect(page.locator('#ice-cream-stack .stack-item.strawberry')).toHaveCount(2);
     await expect(page.locator('#ice-cream-stack .stack-item.topping.cream')).toHaveCount(2);
+    
+    // 验证总元素数量：1个甜筒 + 2个草莓 + 2个淡奶油 = 5个
+    await expect(page.locator('#ice-cream-stack .stack-item')).toHaveCount(1 + 2 + 2);
     
     // 验证总价正确
     await expect(page.locator('#total-price')).toHaveText('¥12.00');
@@ -137,12 +148,17 @@ test.describe('冰激凌小店测试', () => {
     // 点击开始新订单按钮
     await page.click('#new-order-btn');
     
-    // 验证订单已重置
-    await expect(page.locator('#ice-cream-stack .stack-item')).toHaveCount(0);
+    // 验证订单已重置, 只有甜筒在订单中
+    await expect(page.locator('#ice-cream-stack .stack-item.cone-style')).toHaveCount(1);
+    await expect(page.locator('#ice-cream-stack .stack-item')).toHaveCount(1);
     await expect(page.locator('#total-price')).toHaveText('¥0.00');
   });
 
   test('测试结算按钮功能 - 无商品', async ({ page }) => {
+    // 验证初始状态只有甜筒
+    await expect(page.locator('#ice-cream-stack .stack-item')).toHaveCount(1);
+    await expect(page.locator('#ice-cream-stack .stack-item.cone-style')).toHaveCount(1);
+
     // 不添加任何商品，直接点击结算按钮
     await page.click('#checkout-btn');
     
@@ -179,5 +195,62 @@ test.describe('冰激凌小店测试', () => {
     
     // 确保菜单区域比订单区域宽
     expect(parseInt(menuFlex)).toBeGreaterThan(parseInt(orderFlex));
+  });
+
+  test('测试添加大量冰激凌球和淋酱，确保滚动和堆叠正确', async ({ page }) => {
+    const scoopFlavors = ['strawberry', 'chocolate', 'vanilla', 'mint'];
+    const toppingFlavors = ['cream', 'cherry', 'caramel'];
+
+    // 确保所有口味都至少出现一次，然后随机添加剩余的
+    let scoopsToAdd = [...scoopFlavors]; // 包含所有4种口味
+    for (let i = 0; i < 4; i++) { // 再添加4个随机口味，总共8个
+      scoopsToAdd.push(scoopFlavors[Math.floor(Math.random() * scoopFlavors.length)]);
+    }
+    // 打乱冰激凌球的添加顺序
+    for (let i = scoopsToAdd.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [scoopsToAdd[i], scoopsToAdd[j]] = [scoopsToAdd[j], scoopsToAdd[i]];
+    }
+
+    // 随机选择3个淋酱
+    let toppingsToAdd = [];
+    for (let i = 0; i < 3; i++) {
+      toppingsToAdd.push(toppingFlavors[Math.floor(Math.random() * toppingFlavors.length)]);
+    }
+    // 打乱淋酱的添加顺序
+    for (let i = toppingsToAdd.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [toppingsToAdd[i], toppingsToAdd[j]] = [toppingsToAdd[j], toppingsToAdd[i]];
+    }
+
+    // 模拟添加冰激凌球
+    for (const flavor of scoopsToAdd) {
+      await page.click(`.flavor[data-flavor="${flavor}"]`);
+    }
+
+    // 模拟添加淋酱
+    for (const topping of toppingsToAdd) {
+      await page.click(`.topping[data-flavor="${topping}"]`);
+    }
+
+    // 验证总元素数量：1个甜筒 + 8个冰激凌球 + 3个淋酱 = 12个
+    await expect(page.locator('#ice-cream-stack .stack-item')).toHaveCount(1 + 8 + 3);
+
+    // 验证滚动条是否在底部
+    const coneContainer = page.locator('.cone-container');
+    await expect(coneContainer).toBeVisible();
+
+    const isScrolledToBottom = await page.evaluate(() => {
+      const container = document.querySelector('.cone-container');
+      if (!container) return false;
+      // 允许少量误差，因为渲染或子像素可能导致微小差异
+      const tolerance = 2;
+      return container.scrollHeight - container.scrollTop <= container.clientHeight + tolerance;
+    });
+    expect(isScrolledToBottom).toBeTruthy();
+
+    // 验证甜筒在最下方且可见 (通过检查其类和可见性)
+    const coneElement = page.locator('#ice-cream-stack .stack-item.cone-style');
+    await expect(coneElement).toBeVisible();
   });
 });

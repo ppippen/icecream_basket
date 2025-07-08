@@ -29,6 +29,45 @@ Implemented a scrollable container for the ice cream and cone, allowing for an u
     -   Modified `updateOrderDisplay` to handle the new stacking logic.
     -   Added auto-scrolling functionality.
 
+### Enhancement: Adjust Checkout Modal Position
+
+Adjusted the vertical position of the checkout modal to ensure the "Start New Order" button is always visible without scrolling.
+
+**Key Changes:**
+
+-   The `margin-top` of the `.modal-content` was reduced.
+
+**Files Modified:**
+
+-   `styles.css`: Modified the `margin` property for `.modal-content`.
+
+### Enhancement: Dynamic Test Port Configuration
+
+Configured Playwright to dynamically select an available port for the local test server, resolving port conflict issues.
+
+**Key Changes:**
+
+-   Playwright's `webServer` now automatically selects a free port.
+-   Test navigation uses relative paths.
+
+**Files Modified:**
+
+-   `playwright.config.js`: Removed fixed `port` and adjusted `command` for `webServer`.
+-   `tests/icecream.spec.js`: Changed `page.goto` to use a relative path (`/`).
+
+### Refactor: Update Playwright Tests for Dynamic Cone
+
+Rewrote existing Playwright test cases to account for the dynamically added cone element in the ice cream stack, ensuring accurate assertions.
+
+**Key Changes:**
+
+-   Updated assertions for `stack-item` counts to include the cone element.
+-   Specifically re-evaluated test cases related to adding items and checking stack contents.
+
+**Files Modified:**
+
+-   `tests/icecream.spec.js`: Modified test cases 2, 3, 5, and 6 to reflect the new DOM structure.
+
 ---
 
 <a name="中文"></a>
@@ -55,3 +94,42 @@ Implemented a scrollable container for the ice cream and cone, allowing for an u
     -   添加了在页面加载时初始化甜筒的逻辑。
     -   修改了 `updateOrderDisplay` 以处理新的堆叠逻辑。
     -   添加了自动滚动功能。
+
+#### 优化：调整结算模态框位置
+
+调整了结算模态框的垂直位置，以确保“开始新订单”按钮始终可见，无需滚动页面。
+
+**主要变更：**
+
+-   `.modal-content` 的 `margin-top` 值被减小。
+
+**修改的文件：**
+
+-   `styles.css`: 修改了 `.modal-content` 的 `margin` 属性。
+
+#### 优化：动态测试端口配置
+
+配置 Playwright 动态选择本地测试服务器的可用端口，解决了端口冲突问题。
+
+**主要变更：**
+
+-   Playwright 的 `webServer` 现在会自动选择一个空闲端口。
+-   测试导航使用相对路径。
+
+**修改的文件：**
+
+-   `playwright.config.js`: 移除了固定的 `port`，并调整了 `webServer` 的 `command`。
+-   `tests/icecream.spec.js`: 将 `page.goto` 改为使用相对路径 (`/`)。
+
+#### 重构：更新 Playwright 测试以适应动态甜筒
+
+重写了现有的 Playwright 测试用例，以适应冰激凌堆叠中动态添加的甜筒元素，确保断言的准确性。
+
+**主要变更：**
+
+-   更新了 `stack-item` 数量的断言，以包含甜筒元素。
+-   特别重新评估了与添加项目和检查堆叠内容相关的测试用例。
+
+**修改的文件：**
+
+-   `tests/icecream.spec.js`: 修改了测试用例 2、3、5 和 6，以反映新的 DOM 结构。

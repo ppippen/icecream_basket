@@ -27,8 +27,7 @@ module.exports = defineConfig({
   ],
   /* 本地开发服务器配置 */
   webServer: {
-    command: 'npx http-server -p 3000',
-    port: 3000,
+    command: 'npx http-server',
     reuseExistingServer: !process.env.CI,
   },
 }); 
