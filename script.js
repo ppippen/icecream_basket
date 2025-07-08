@@ -1,3 +1,16 @@
+document.addEventListener('DOMContentLoaded', () => {
+    initializeCone();
+});
+
+// 初始化甜筒
+function initializeCone() {
+    const iceCreamStack = document.getElementById('ice-cream-stack');
+    iceCreamStack.innerHTML = ''; // 清空
+    const coneElement = document.createElement('div');
+    coneElement.classList.add('stack-item', 'cone-style');
+    iceCreamStack.appendChild(coneElement);
+}
+
 // 初始化订单数组和总价
 let order = [];
 let totalPrice = 0;
@@ -79,29 +92,26 @@ function addItemToOrder(type, flavor, price) {
 
 // 更新订单显示
 function updateOrderDisplay() {
-    // 清空当前堆叠区域
-    iceCreamStack.innerHTML = '';
+    // 重新初始化甜筒
+    initializeCone();
     
-    // 分离冰激凌球和淋酱
-    const scoops = order.filter(item => item.type === 'scoop');
-    const toppings = order.filter(item => item.type === 'topping');
-    
-    // 先添加冰激凌球（从底部到顶部）
-    scoops.forEach(scoop => {
+    // 渲染订单中的所有项目
+    order.forEach(item => {
         const stackItem = document.createElement('div');
-        stackItem.classList.add('stack-item', scoop.flavor);
-        iceCreamStack.appendChild(stackItem);
-    });
-    
-    // 再添加淋酱（从底部到顶部）
-    toppings.forEach(topping => {
-        const stackItem = document.createElement('div');
-        stackItem.classList.add('stack-item', 'topping', topping.flavor);
+        if (item.type === 'scoop') {
+            stackItem.classList.add('stack-item', item.flavor);
+        } else if (item.type === 'topping') {
+            stackItem.classList.add('stack-item', 'topping', item.flavor);
+        }
         iceCreamStack.appendChild(stackItem);
     });
     
     // 更新总价显示
     totalPriceElement.textContent = `¥${totalPrice.toFixed(2)}`;
+
+    // 滚动到底部
+    const coneContainer = document.querySelector('.cone-container');
+    coneContainer.scrollTop = coneContainer.scrollHeight;
 }
 
 // 撤销按钮点击事件
