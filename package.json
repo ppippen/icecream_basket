@@ -10,7 +10,7 @@
     "start": "http-server -p 3000",
     "test": "playwright test",
     "dev": "live-server --port=3000 --no-browser",
-    "build": "echo 'Building project...' && mkdir -p dist && cp -r index.html styles.css script.js icons dist/",
+    "build": "echo 'Building project...' && mkdir -p dist && cp -r index.html styles.css script.js icons sounds dist/",
     "postinstall": "npx playwright install",
     "deploy": "gh-pages -d dist"
   },
