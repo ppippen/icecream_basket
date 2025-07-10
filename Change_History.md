@@ -7,6 +7,39 @@
 <a name="english"></a>
 ## English
 
+### 2025-07-10
+
+#### Feature: Add Sound Effects to UI Buttons
+
+Added sound effects to major button-click events to enhance user interaction and provide auditory feedback.
+
+**Key Changes:**
+
+1.  **Audio Initialization**:
+    *   Pre-loaded and decoded `pop.mp3` using the Web Audio API at the start of `script.js` for instant playback.
+    *   Created standard `<audio>` elements for the other three sound effects: `undo.mp3`, `checkout.mp3`, and `newOrder.mp3`.
+2.  **Encapsulated Playback Functions**:
+    *   Created a dedicated function, `playPopSound()`, to play random segments of `pop.mp3`, providing varied sound feedback for adding items. The configuration for the sound clips is:
+        ```json
+        [
+          {"start": 0.11, "duration": 0.02},
+          {"start": 0.81, "duration": 0.03},
+          {"start": 1.57, "duration": 0.02},
+          {"start": 2.08, "duration": 0.03},
+          {"start": 2.82, "duration": 0.01}
+        ]
+        ```
+    *   Created three other simple playback functions for `undo.mp3`, `checkout.mp3`, and `newOrder.mp3`.
+3.  **Event Binding**:
+    *   **Add Item**: Called `playPopSound()` within the `addItemToOrder` function.
+    *   **Undo Button**: Invoked the playback function for `undo.mp3` in the undo button's click listener.
+    *   **Checkout Button**: Invoked the playback function for `checkout.mp3` in the checkout button's click listener.
+    *   **New Order Button**: Invoked the playback function for `newOrder.mp3` in the new order button's click listener.
+
+**Files Modified:**
+
+*   `script.js`: Implemented all logic for loading, playing, and binding sound effects.
+
 ### 2025-07-08
 
 #### Feature: Implement scrollable ice cream stack
@@ -72,6 +105,39 @@ Rewrote existing Playwright test cases to account for the dynamically added cone
 
 <a name="中文"></a>
 ## 中文
+
+### 2025年7月10日
+
+#### 功能：为界面按钮添加音效
+
+为了增强用户交互的趣味性和反馈感，为应用内的主要按钮点击事件添加了声音效果。
+
+**主要变更：**
+
+1.  **音频初始化**:
+    *   在 `script.js` 开头，使用 Web Audio API 预加载并解码 `pop.mp3` 文件，以实现快速、无延迟的播放。
+    *   为 `undo.mp3`、`checkout.mp3` 和 `newOrder.mp3` 创建了常规的 `<audio>` 元素用于播放。
+2.  **封装播放函数**:
+    *   创建了一个专门的函数 `playPopSound()`，用于从一个预设片段列表中随机播放 `pop.mp3` 的一部分，为添加商品的操作提供多样化的音效。音效片段配置如下：
+        ```json
+        [
+          {"start": 0.11, "duration": 0.02},
+          {"start": 0.81, "duration": 0.03},
+          {"start": 1.57, "duration": 0.02},
+          {"start": 2.08, "duration": 0.03},
+          {"start": 2.82, "duration": 0.01}
+        ]
+        ```
+    *   为另外三个音效创建了独立的、简单的播放函数。
+3.  **事件绑定**:
+    *   **添加商品**: 在 `addItemToOrder` 函数中调用 `playPopSound()`。
+    *   **撤销按钮**: 在撤销按钮的点击事件监听器中调用 `undo.mp3` 的播放函数。
+    *   **结算按钮**: 在结算按钮的点击事件监听器中调用 `checkout.mp3` 的播放函数。
+    *   **新订单按钮**: 在新订单按钮的点击事件监听器中调用 `newOrder.mp3` 的播放函数。
+
+**修改的文件**:
+
+*   `script.js`: 实现了所有音效的加载、播放和事件绑定逻辑。
 
 ### 2025年7月8日
 
