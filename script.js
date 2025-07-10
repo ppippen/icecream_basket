@@ -1,6 +1,64 @@
 document.addEventListener('DOMContentLoaded', () => {
     initializeCone();
+    initializeAudio();
 });
+
+// --- 音频处理 ---
+let audioContext;
+let popBuffer;
+const popSoundVariations = [
+    {"start": 0.11, "duration": 0.02},
+    {"start": 0.81, "duration": 0.03},
+    {"start": 1.57, "duration": 0.02},
+    {"start": 2.08, "duration": 0.03},
+    {"start": 2.82, "duration": 0.01}
+];
+let lastPopIndex = -1;
+
+const undoSound = new Audio('sounds/undo.mp3');
+const checkoutSound = new Audio('sounds/checkout.mp3');
+const newOrderSound = new Audio('sounds/newOrder.mp3');
+
+function initializeAudio() {
+    try {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        fetch('sounds/pop.mp3')
+            .then(response => response.arrayBuffer())
+            .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
+            .then(decodedData => {
+                popBuffer = decodedData;
+            })
+            .catch(error => console.error('Error loading pop sound:', error));
+    } catch (e) {
+        console.error('Web Audio API is not supported in this browser', e);
+    }
+}
+
+function playSound(audioElement) {
+    if (audioElement) {
+        audioElement.currentTime = 0;
+        audioElement.play().catch(e => console.error("Error playing sound:", e));
+    }
+}
+
+function playPopSound() {
+    if (!popBuffer || !audioContext) return;
+
+    // 随机选择一个与上次不同的音效片段
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * popSoundVariations.length);
+    } while (popSoundVariations.length > 1 && randomIndex === lastPopIndex);
+    lastPopIndex = randomIndex;
+
+    const { start, duration } = popSoundVariations[randomIndex];
+
+    const source = audioContext.createBufferSource();
+    source.buffer = popBuffer;
+    source.connect(audioContext.destination);
+    source.start(0, start, duration);
+}
+
 
 // 初始化甜筒
 function initializeCone() {
@@ -73,6 +131,7 @@ function hasScoops() {
 
 // 添加商品到订单
 function addItemToOrder(type, flavor, price) {
+    playPopSound(); // 播放添加音效
     // 创建新商品对象
     const item = {
         type: type,
@@ -117,6 +176,7 @@ function updateOrderDisplay() {
 // 撤销按钮点击事件
 undoButton.addEventListener('click', () => {
     if (order.length > 0) {
+        playSound(undoSound); // 播放撤销音效
         // 移除最后一个商品
         const removedItem = order.pop();
         
@@ -135,6 +195,7 @@ checkoutButton.addEventListener('click', () => {
         return;
     }
     
+    playSound(checkoutSound); // 播放结算音效
     // 更新模态框中的数量显示
     updateModalCounts();
     
@@ -159,6 +220,7 @@ window.addEventListener('click', (event) => {
 
 // 开始新订单
 newOrderButton.addEventListener('click', () => {
+    playSound(newOrderSound); // 播放新订单音效
     // 重置所有数量显示为0
     document.querySelectorAll('.count').forEach(element => {
         element.textContent = 'x0';
