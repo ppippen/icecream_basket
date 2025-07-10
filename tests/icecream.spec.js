@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 test.describe('冰激凌小店测试', () => {
   test.beforeEach(async ({ page }) => {
     // 在每个测试前访问冰激凌小店页面
-    await page.goto('http://localhost:64909');
+    await page.goto('http://localhost:3000');
   });
 
   test('测试添加冰激凌球后可以添加淋酱', async ({ page }) => {
@@ -197,7 +197,7 @@ test.describe('冰激凌小店测试', () => {
     expect(parseInt(menuFlex)).toBeGreaterThan(parseInt(orderFlex));
   });
 
-  test('测试添加大量冰激凌球和淋酱，确保滚动和堆叠正确', async ({ page }) => {
+  test('测试随机添加大量冰激凌球和淋酱，确保出现滚动条和堆叠正确', async ({ page }) => {
     const scoopFlavors = ['strawberry', 'chocolate', 'vanilla', 'mint'];
     const toppingFlavors = ['cream', 'cherry', 'caramel'];
 
