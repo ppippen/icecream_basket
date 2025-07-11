@@ -70,6 +70,7 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 }
 
 /* 冰激凌球和淋酱样式 */
@@ -230,7 +231,7 @@ h3 {
 .action-buttons {
     display: flex;
     gap: 20px;
-    margin-top: 20px;
+    margin-top: 10px; /* Reduced from 20px */
     width: 100%;
     justify-content: center;
 }
@@ -481,7 +482,7 @@ h3 {
 }
 
 /* 响应式设计优化 - 针对横屏手机 */
-@media screen and (max-width: 700px) and (orientation: landscape) {
+@media screen and (max-width: 900px) and (orientation: landscape) {
     /* 整体布局调整 */
     .container {
         padding: 10px;
@@ -528,6 +529,8 @@ h3 {
     
     .order-section {
         flex: 2;
+        justify-content: space-between;
+        height: 100%;
     }
     
     /* 商品选择区域调整 */
@@ -557,14 +560,9 @@ h3 {
         width: 120px;
     }
     
-    .cone {
+    .stack-item.cone-style {
         width: 60px;
         height: 90px;
-    }
-    
-    .ice-cream-stack {
-        bottom: 80px;
-        width: 60px;
     }
     
     .stack-item {
@@ -588,8 +586,9 @@ h3 {
         width: 90%;
         max-width: 500px;
         padding: 15px;
-        max-height: 90vh;
-        overflow-y: auto;
+        max-height: 85vh; /* Set max height to prevent overflow */
+        overflow-y: auto; /* Enable scrolling for tall content */
+        margin: 2vh auto; /* Reduce vertical margin */
     }
     
     .modal-content h2 {
