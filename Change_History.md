@@ -7,6 +7,32 @@
 <a name="english"></a>
 ## English
 
+### 2025-07-11
+
+#### Enhancement: Responsive Layout and Performance Tuning
+
+Performed a series of updates to improve the application's performance and fix critical layout issues on various mobile devices, especially in landscape orientation.
+
+**Key Changes:**
+
+1.  **Audio Preloading for Performance**:
+    *   To prevent interaction delays (INP) on the first click, `<link rel="preload">` tags were added to `index.html` for `checkout.mp3`, `newOrder.mp3`, and `undo.mp3`. This ensures sounds are loaded with the page and play instantly.
+
+2.  **Fix for Build Script**:
+    *   The `build` script in `package.json` was updated to correctly copy the `sounds/` directory to the `dist/` folder, ensuring audio files are available in the production build.
+
+3.  **Responsive Layout Enhancements**:
+    *   **Sticky Action Buttons**: Applied flexbox properties (`justify-content: space-between`) to the `.order-section` to ensure the "Undo" and "Checkout" buttons stick to the bottom of the screen on tablets (e.g., iPad portrait) and mobile landscape views.
+    *   **Scrollable Checkout Modal**: Made the checkout modal scrollable on short, wide screens (e.g., iPhone landscape) by setting a `max-height` and `overflow-y: auto`, preventing content from being cut off.
+    *   **Corrected Landscape Breakpoint**: Adjusted the CSS media query breakpoint from `700px` to `900px` to correctly apply landscape optimizations to modern, wide-screen phones like the iPhone XR.
+    *   **Fixed Cone Sizing**: Corrected an invalid CSS selector (`.cone` to `.stack-item.cone-style`) in the landscape media query to ensure the ice cream cone resizes correctly.
+
+**Files Modified:**
+
+*   `index.html`: Added `<link rel="preload">` tags.
+*   `package.json`: Updated the `build` script.
+*   `styles.css`: Implemented all responsive layout fixes and enhancements.
+
 ### 2025-07-10
 
 #### Feature: Add Sound Effects to UI Buttons
@@ -62,7 +88,7 @@ Implemented a scrollable container for the ice cream and cone, allowing for an u
     -   Modified `updateOrderDisplay` to handle the new stacking logic.
     -   Added auto-scrolling functionality.
 
-### Enhancement: Adjust Checkout Modal Position
+#### Enhancement: Adjust Checkout Modal Position
 
 Adjusted the vertical position of the checkout modal to ensure the "Start New Order" button is always visible without scrolling.
 
@@ -74,7 +100,7 @@ Adjusted the vertical position of the checkout modal to ensure the "Start New Or
 
 -   `styles.css`: Modified the `margin` property for `.modal-content`.
 
-### Enhancement: Dynamic Test Port Configuration
+#### Enhancement: Dynamic Test Port Configuration
 
 Configured Playwright to dynamically select an available port for the local test server, resolving port conflict issues.
 
@@ -88,7 +114,7 @@ Configured Playwright to dynamically select an available port for the local test
 -   `playwright.config.js`: Removed fixed `port` and adjusted `command` for `webServer`.
 -   `tests/icecream.spec.js`: Changed `page.goto` to use a relative path (`/`).
 
-### Refactor: Update Playwright Tests for Dynamic Cone
+#### Refactor: Update Playwright Tests for Dynamic Cone
 
 Rewrote existing Playwright test cases to account for the dynamically added cone element in the ice cream stack, ensuring accurate assertions.
 
@@ -105,6 +131,32 @@ Rewrote existing Playwright test cases to account for the dynamically added cone
 
 <a name="中文"></a>
 ## 中文
+
+### 2025年7月11日
+
+#### 优化：响应式布局与性能调优
+
+进行了一系列更新，以提升应用性能并修复在多种移动设备（尤其是在横屏模式下）的关键布局问题。
+
+**主要变更：**
+
+1.  **音频预加载以优化性能**:
+    *   为了防止首次点击按钮时出现交互延迟（INP），在 `index.html` 中为 `checkout.mp3`, `newOrder.mp3`, 和 `undo.mp3` 添加了 `<link rel="preload">` 标签。这确保了音效文件随页面一同加载，从而实现即时播放。
+
+2.  **修复构建脚本**:
+    *   更新了 `package.json` 中的 `build` 脚本，以确保 `sounds/` 目录能被正确复制到 `dist/` 文件夹中，使音效文件在生产版本中可用。
+
+3.  **响应式布局增强**:
+    *   **操作按钮贴底**: 对 `.order-section` 应用了 Flexbox 属性 (`justify-content: space-between`)，以确保“撤销”和“结算”按钮在平板电脑（如 iPad 竖屏）和手机横屏视图中能固定在屏幕底部。
+    *   **可滚动的结算弹窗**: 通过设置 `max-height` 和 `overflow-y: auto`，使结算弹窗在较矮的宽屏（如 iPhone 横屏）上可以滚动，防止内容被截断。
+    *   **修正横屏断点**: 将 CSS 媒体查询的断点从 `700px` 调整为 `900px`，以确保横屏优化能正确应用于像 iPhone XR 这样的现代宽屏手机。
+    *   **修复甜筒尺寸**: 在横屏媒体查询中，修正了一个无效的 CSS 选择器（从 `.cone` 改为 `.stack-item.cone-style`），以确保冰激凌甜筒能正确地调整大小。
+
+**修改的文件：**
+
+*   `index.html`: 添加了 `<link rel="preload">` 标签。
+*   `package.json`: 更新了 `build` 脚本。
+*   `styles.css`: 实现了所有响应式布局的修复与增强。
 
 ### 2025年7月10日
 
