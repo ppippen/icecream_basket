@@ -560,14 +560,9 @@ h3 {
         width: 120px;
     }
     
-    .cone {
+    .stack-item.cone-style {
         width: 60px;
         height: 90px;
-    }
-    
-    .ice-cream-stack {
-        bottom: 80px;
-        width: 60px;
     }
     
     .stack-item {
